@@ -1,0 +1,33 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    background-color: rgba(0, 0, 0, 1);
+    background-image: url("https://i.imgur.com/voANQYf.png"); 
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+    font-family: 'Space Mono', monospace;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  a {
+    text-decoration: none;
+    color: white;
+  }
+  
+  
+  .container {
+    display: block;
+    margin: 0 auto;
+    
+  }
+  
+  .searchTerm {
+    width: 300px;
+  }
