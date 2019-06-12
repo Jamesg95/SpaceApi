@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Space Search</title>
+    <link href="main.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Space+Mono&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+      <h1>SPACE SEARCH</h1>
+      <img src="http://www.caccioppoli.com/Animated%20gifs/Space/Spaceman.gif">
+      <form id="js-form">
+        <label for="space-search">Lets Travel Through SPACE!!!</label>
+        <input class="searchTerm" type="text" name="space-search" id="js-space-search"
+        placeholder="Look up Planets, Stars, and Moons!!" required>
+        <input class="button" type="submit" value="Travel!"> 
+      </form>
+      
+
+      <section class="results hidden">
+        <h3>Where are we??</h3>
+        <div id="results-page-gif"></div>
+        <div id="results-page"></div>
+        <div id="results-page-youtube"></div>
+      </section>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
