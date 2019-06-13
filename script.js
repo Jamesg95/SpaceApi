@@ -4,6 +4,7 @@ function spaceApi() {
 
   function displayResults(responseJson) {
     console.log(responseJson);
+    $('#results-error').empty();
     $('#results-page').empty();
     $('#results-page').append(
       `<ul class="info-list">
@@ -35,11 +36,12 @@ function spaceApi() {
       });
   }
 
-  function displayError(error) {
+  function displayError() {
     console.log('displayError ran');
-    $('#results-page').empty();
-    $('.results').html(`<h3 class="error">Something went wrong: ${error} Please Try Again.</h3>`)
+    $('#results-error').empty();
+    $('#results-error').html(`<h3 class="error">Something went wrong: Search Term Not Found. Can not output new information. Please Try Again.</h3>`)
     $('.results').removeClass('hidden')
+
   }
 
   function watchForm() {
@@ -55,7 +57,8 @@ function spaceApi() {
   $(function() {
     console.log('Space App Loaded! Waiting for submit!');
     watchForm();
-  }); 
+  });
+  
 }
 
 function giphyApi() {
@@ -112,8 +115,8 @@ function giphyApi() {
   
   function displayError(error) {
     console.log('displayError ran');
-    $('#results-page-gif').empty();
-    $('.results').html(`<h3 class="error">Something went wrong: ${error} Please Try Again.</h3>`)
+    $('.results').empty();
+    $('.results').append(`<h3 class="error">Something went wrong: ${error} Please Try Again.</h3>`)
     $('.results').removeClass('hidden')
   }
   
@@ -190,8 +193,8 @@ function youtubeApi() {
 
   function displayError(error) {
     console.log('displayError ran');
-    $('#results-page-youtube').empty();
-    $('.results').html(`<h3 class="error">Something went wrong: ${error} Please Try Again.</h3>`)
+    $('.results').empty();
+    $('.results').append(`<h3 class="error">Something went wrong: ${error} Please Try Again.</h3>`)
     $('.results').removeClass('hidden')
   }
 
@@ -211,6 +214,7 @@ function youtubeApi() {
   }); 
 }
 
-spaceApi();
+
 giphyApi();
 youtubeApi();
+spaceApi();
