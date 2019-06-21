@@ -1,4 +1,201 @@
 'use strict'
+function exampleSpaceApi() {
+  const baseUrl="https://api.le-systeme-solaire.net/rest/bodies/earth"
+
+  function displayResults(responseJson) {
+    console.log(responseJson);
+    $('#results-error').empty();
+    $('#results-page').empty();
+    $('#results-page').append(
+      `<h3>We are at <span class="space-title">${responseJson.name}!</span></h3>
+      <ul class="info-list">
+        <li>Name:    ${responseJson.name}</li>
+        <li>English Name:    ${responseJson.englishName}</li>
+        <li>Is it a planet?    ${responseJson.isPlanet}</li>
+        <li>Density:    ${responseJson.density} g/cm^3</li>
+        <li>Gravity:    ${responseJson.gravity} m/s^2</li>
+      </ul>
+    `);
+
+    $('.results').removeClass('hidden');
+  };
+
+  function getBodies(baseUrl) {
+    
+    const url = baseUrl;
+    console.log(url);
+    fetch(url)
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error(response.statusText);
+      })
+      .then(responseJson => displayResults(responseJson))
+      .catch(err => {
+        displayError(err.message);
+      });
+  }
+
+  function displayError() {
+    console.log('displayError ran');
+    $('#results-error').empty();
+    $('#results-error').html(`<h3 class="error">Something went wrong: Search Term Not Found. Can not output new information. Please Try Again.</h3>`)
+    $('.results').removeClass('hidden')
+
+  }
+
+  
+
+  $(function() {
+    console.log('Example Page Ran!');
+    getBodies(baseUrl);
+  });
+  
+}
+
+function exampleGiphyApi() {
+const baseUrl ="https://api.giphy.com/v1/stickers/search";
+const apiKey ="uQOK3GooXflzjEFFptWV0v38YzdVAFuE";
+  
+  function formatQueryParams(params) {
+    const queryItems = Object.keys(params)
+    .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
+    return queryItems.join('&');
+  }
+  
+  function displayResults(responseJson) {
+    console.log(responseJson);
+  
+    $('#results-page-gif').empty();
+      
+    $('#results-page-gif').append(
+      `<ul class="gif-list">
+        <li>
+          <div>
+            <img class="gif" src="${responseJson.data[0].images.original.url}">
+          </div>
+        </li>
+      </ul>
+    `);
+    
+    $('.results').removeClass('hidden');
+  };
+  
+  function getGifs(baseUrl) {
+    const params = {
+      q: 'space' + ' ' + 'earth',
+      limit: 1,
+      offset: 0,
+      rating: 'G',
+      lang: 'en'
+    };
+    const queryString = formatQueryParams(params)
+    const url = baseUrl + '?' + '&api_key=' + apiKey + '&' + queryString;
+    console.log(url);
+      fetch(url)
+        .then(response => {
+          if (response.ok) {
+            return response.json();
+          }
+          throw new Error(response.statusText);
+        })
+        .then(responseJson => displayResults(responseJson))
+        .catch(err => {
+          displayError(err.message);
+        });
+  }
+  
+  function displayError(error) {
+    console.log('displayError ran');
+    $('.results').empty();
+    $('.results').append(`<h3 class="error">Something went wrong: ${error} Please Try Again.</h3>`)
+    $('.results').removeClass('hidden')
+  }
+  
+  
+  
+  $(function() {
+    console.log('Giphy Example Loaded');
+    getGifs(baseUrl);
+  }); 
+}
+
+function exampleYoutubeApi() {
+  const baseUrl="https://www.googleapis.com/youtube/v3/search";
+  const apiKey="AIzaSyC9-N1X2NtrOdcJclkFeJacOLwovgheL50";
+
+  function formatQueryParams(params) {
+    const queryItems = Object.keys(params)
+    .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
+    return queryItems.join('&');
+  }
+
+
+  function displayResults(responseJson) {
+    console.log(responseJson);
+    $('#results-page-youtube').empty();
+    for (let i = 0; i < responseJson.items.length; i++) {
+    $('#results-page-youtube').append(
+      `<div class="video-results">
+        <iframe src="https://www.youtube.com/embed/${responseJson.items[i].id.videoId}"></iframe>
+          <a href="https://www.youtube.com/embed/${responseJson.items[i].id.videoId}"
+            target="_blank">
+            <div class="info">
+              <h4>${responseJson.items[i].snippet.title}</h4>
+              <p>"${responseJson.items[i].snippet.description}"</p>
+            </div>
+          </a>
+        </div>
+      `);
+    }   
+    
+    $('.results').removeClass('hidden');
+  };
+
+  function getVideos(baseUrl) {
+    const params = {
+      part: 'snippet',
+      key: apiKey,
+      q: 'science' + ' ' + 'earth',
+      maxResults: 6,
+      type: 'video'
+    };
+
+    const queryString = formatQueryParams(params)
+    const url = baseUrl + '?' + queryString;
+    console.log(url);
+    fetch(url)
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error(response.statusText);
+      })
+      .then(responseJson => displayResults(responseJson))
+      .catch(err => {
+        displayError(err.message);
+      });
+  }
+
+  function displayError(error) {
+    console.log('displayError ran');
+    $('.results').empty();
+    $('.results').append(`<h3 class="error">Something went wrong: ${error} Please Try Again.</h3>`)
+    $('.results').removeClass('hidden')
+  }
+  
+  getVideos(baseUrl);
+
+  $(function() {
+    console.log('Youtube Api Loaded! Waiting for submit!');
+    getVideos(baseUrl);
+  }); 
+}
+exampleSpaceApi();
+exampleGiphyApi();
+exampleYoutubeApi();
+
 function spaceApi() {
   const baseUrl="https://api.le-systeme-solaire.net/rest/bodies/"
 
@@ -7,12 +204,13 @@ function spaceApi() {
     $('#results-error').empty();
     $('#results-page').empty();
     $('#results-page').append(
-      `<ul class="info-list">
-        <li>Name:${responseJson.name}</li>
-        <li>English Name: ${responseJson.englishName}</li>
-        <li>Is it a planet?? ${responseJson.isPlanet}</li>
-        <li>Density: ${responseJson.density} g/cm^3</li>
-        <li>Gravity: ${responseJson.gravity} m/s^2</li>
+      `<h3>We are at <span class="space-title">${responseJson.name}!</span></h3>
+      <ul class="info-list">
+        <li>Name:    ${responseJson.name}</li>
+        <li>English Name:    ${responseJson.englishName}</li>
+        <li>Is it a planet?    ${responseJson.isPlanet}</li>
+        <li>Density:    ${responseJson.density} g/cm^3</li>
+        <li>Gravity:    ${responseJson.gravity} m/s^2</li>
       </ul>
     `);
 
@@ -28,11 +226,11 @@ function spaceApi() {
         if (response.ok) {
           return response.json();
         }
-        throw new Error(response.statusText);
+        
       })
       .then(responseJson => displayResults(responseJson))
       .catch(err => {
-        displayError(err.message);
+        displayError(err);
       });
   }
 
@@ -80,7 +278,7 @@ function giphyApi() {
       `<ul class="gif-list">
         <li>
           <div>
-            <img src="${responseJson.data[0].images.original.url}">
+            <img class="gif" src="${responseJson.data[0].images.original.url}">
           </div>
         </li>
       </ul>
@@ -108,17 +306,10 @@ function giphyApi() {
           throw new Error(response.statusText);
         })
         .then(responseJson => displayResults(responseJson))
-        .catch(err => {
-          displayError(err.message);
-        });
+        
   }
   
-  function displayError(error) {
-    console.log('displayError ran');
-    $('.results').empty();
-    $('.results').append(`<h3 class="error">Something went wrong: ${error} Please Try Again.</h3>`)
-    $('.results').removeClass('hidden')
-  }
+  
   
   function watchForm() {
     $('#js-form').submit(event => {
@@ -152,14 +343,16 @@ function youtubeApi() {
     $('#results-page-youtube').empty();
     for (let i = 0; i < responseJson.items.length; i++) {
     $('#results-page-youtube').append(
-      `<iframe src="https://www.youtube.com/embed/${responseJson.items[i].id.videoId}"></iframe>
-        <a href="https://www.youtube.com/embed/${responseJson.items[i].id.videoId}"
-          target="_blank">
-          <div class="info">
-            <h4>Title:${responseJson.items[i].snippet.title}</h4>
-            <p>Description:"${responseJson.items[i].snippet.description}"</p>
-          </div>
-        </a>
+      `<div class="video-results">
+        <iframe src="https://www.youtube.com/embed/${responseJson.items[i].id.videoId}"></iframe>
+          <a href="https://www.youtube.com/embed/${responseJson.items[i].id.videoId}"
+            target="_blank">
+            <div class="info">
+              <h4>${responseJson.items[i].snippet.title}</h4>
+              <p>"${responseJson.items[i].snippet.description}"</p>
+            </div>
+          </a>
+        </div>
       `);
     }   
     
@@ -171,7 +364,7 @@ function youtubeApi() {
       part: 'snippet',
       key: apiKey,
       q: 'science' + searchTerm,
-      maxResults: 5,
+      maxResults: 6,
       type: 'video'
     };
 
@@ -186,17 +379,10 @@ function youtubeApi() {
         throw new Error(response.statusText);
       })
       .then(responseJson => displayResults(responseJson))
-      .catch(err => {
-        displayError(err.message);
-      });
+      
   }
 
-  function displayError(error) {
-    console.log('displayError ran');
-    $('.results').empty();
-    $('.results').append(`<h3 class="error">Something went wrong: ${error} Please Try Again.</h3>`)
-    $('.results').removeClass('hidden')
-  }
+  
 
   function watchForm() {
     $('#js-form').submit(event => {
@@ -214,7 +400,36 @@ function youtubeApi() {
   }); 
 }
 
-
 giphyApi();
 youtubeApi();
 spaceApi();
+
+function navLinks() {
+  $("a[href^='#']").click(function(e) {
+      event.preventDefault()
+      $('html, body').animate({
+            scrollTop: $($(this).attr('href')).offset().top,
+          },
+          300,
+          'linear'
+      )
+  });
+}
+
+function scrollChange() {
+  let elmnt = document.getElementById('two');
+
+  $('#js-form').submit(function(e) {
+    elmnt.scrollIntoView({behavior: "smooth"});
+  });
+}
+scrollChange();
+navLinks();
+
+function fadeIn() {
+  $('.header').addClass('load');
+}
+
+$(function() {
+  fadeIn();
+}); 
