@@ -47,11 +47,15 @@ function exampleSpaceApi() {
 
   
 
-  $(function() {
-    console.log('Example Page Ran!');
-    getBodies(baseUrl);
-  });
-  
+  function getExample() {
+    console.log('Example Loaded');
+    $('.green-nav').click(event => {
+      getBodies(baseUrl);
+      navLinks();
+      scrollChange();
+    });
+  }
+  getExample();  
 }
 
 function exampleGiphyApi() {
@@ -70,7 +74,8 @@ const apiKey ="uQOK3GooXflzjEFFptWV0v38YzdVAFuE";
     $('#results-page-gif').empty();
       
     $('#results-page-gif').append(
-      `<ul class="gif-list">
+      `<h3 class="ital question">Where are we?</h3>
+      <ul class="gif-list">
         <li>
           <div>
             <img class="gif" src="${responseJson.data[0].images.original.url}">
@@ -112,13 +117,17 @@ const apiKey ="uQOK3GooXflzjEFFptWV0v38YzdVAFuE";
     $('.results').append(`<h3 class="error">Something went wrong: ${error} Please Try Again.</h3>`)
     $('.results').removeClass('hidden')
   }
-  
-  
-  
-  $(function() {
-    console.log('Giphy Example Loaded');
-    getGifs(baseUrl);
-  }); 
+
+  function getExample() {
+    console.log('Example Loaded');
+    $('.green-nav').click(event => {
+      getGifs(baseUrl);
+      navLinks();
+      scrollChange();
+    });
+  }
+  getExample();  
+
 }
 
 function exampleYoutubeApi() {
@@ -185,12 +194,15 @@ function exampleYoutubeApi() {
     $('.results').removeClass('hidden')
   }
   
-  getVideos(baseUrl);
-
-  $(function() {
-    console.log('Youtube Api Loaded! Waiting for submit!');
-    getVideos(baseUrl);
-  }); 
+  function getExample() {
+    console.log('Example Loaded');
+    $('.green-nav').click(event => {
+      getVideos(baseUrl);
+      navLinks();
+      scrollChange();
+    });
+  }
+  getExample();
 }
 exampleSpaceApi();
 exampleGiphyApi();
@@ -247,8 +259,9 @@ function spaceApi() {
       event.preventDefault();
       console.log('watchForm ran');
       const searchTerm = $('#js-space-search').val();
-      
       getBodies(baseUrl, searchTerm);
+      navLinks();
+      scrollChange();
     });
   }
 
@@ -275,7 +288,8 @@ function giphyApi() {
     $('#results-page-gif').empty();
       
     $('#results-page-gif').append(
-      `<ul class="gif-list">
+      `<h3 class="ital question">Where are we?</h3>
+      <ul class="gif-list">
         <li>
           <div>
             <img class="gif" src="${responseJson.data[0].images.original.url}">
@@ -285,6 +299,7 @@ function giphyApi() {
     `);
     
     $('.results').removeClass('hidden');
+
   };
   
   function getGifs(baseUrl, searchTerm) {
@@ -316,8 +331,9 @@ function giphyApi() {
     event.preventDefault();
     console.log('watchForm ran');
     const searchTerm = $('#js-space-search').val();
-        
     getGifs(baseUrl, searchTerm);
+    navLinks();
+    scrollChange();
     });
   }
   
@@ -389,8 +405,9 @@ function youtubeApi() {
       event.preventDefault();
       console.log('watchForm ran');
       const searchTerm = $('#js-space-search').val();
-      
       getVideos(baseUrl, searchTerm);
+      navLinks();
+      scrollChange();
     });
   }
 
@@ -423,8 +440,7 @@ function scrollChange() {
     elmnt.scrollIntoView({behavior: "smooth"});
   });
 }
-scrollChange();
-navLinks();
+
 
 function fadeIn() {
   $('.header').addClass('load');
