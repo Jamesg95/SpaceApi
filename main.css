@@ -6,7 +6,7 @@
   
 body {
   background-color: rgba(0, 0, 0, 1);
-  background-image: url("https://media.giphy.com/media/TxVVB6PfWMjE4/giphy.gif"); 
+  background-image: url("/Pics/space.gif"); 
   color: white;
   font-family: 'Inconsolata', monospace;
 }
@@ -143,6 +143,7 @@ a {
   border: 2px solid rgba(23, 185, 2, 0.445);
   margin: 10px;
   border-radius: 20px;
+  background-color: rgba(0, 0, 0, 0.493)
 }
 
 #results-page-youtube iframe{

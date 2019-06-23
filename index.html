@@ -11,18 +11,18 @@
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 </head>
 <body>
-    <main class="container">
-      <div class="header" id="one">
+    <main role="main" class="container">
+      <div class="header" id="one" role="heading">
         <h1>SPACE SEARCH</h1>
-        <form id="js-form">
+        <form role="search" id="js-form">
           <label class="space-search" for="space-search">Let's Travel Through <span class="ital">SPACE!!!</span></label></br>
           <input class="searchTerm" type="text" name="space-search" id="js-space-search"
           placeholder="Look up Planets, Stars, and Moons!!" required>
           <div>
             
-            <input class="button" type="submit" value="Travel!"><a href="#two"></a> 
+            <input role="button" class="button" type="submit" value="Travel!"><a href="#two"></a> 
           </div>
-      <h3 class="hide">Example <span><a href="#two" class="green-nav">Below!&#x21b4;</a></span></h3>
+      <h3 class="hide">Example <span><a href="#two" class="green-nav" role="button">Below!&#x21b4;</a></span></h3>
       </div>
       
 
@@ -33,10 +33,10 @@
         <div id="results-page-youtube"></div>
       </section>
       <section class="search-again ital">
-        <span>Search <a href="#one" class="green-nav">Again!&#8634;</a></span>
+        <span>Search <a href="#one" class="green-nav" role="button">Again!&#8634;</a></span>
       </section>
     </main>
-    <footer>James Grigoras 2019</footer>
+    <footer role="contentinfo">James Grigoras 2019</footer>
     <script src="script.js"></script>
 </body>
 </html>
