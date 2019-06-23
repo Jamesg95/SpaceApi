@@ -6,7 +6,7 @@
   
 body {
   background-color: rgba(0, 0, 0, 1);
-  background-image: url("/Pics/space.gif"); 
+  background-image: url("Pics/space.gif"); 
   color: white;
   font-family: 'Inconsolata', monospace;
 }
