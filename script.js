@@ -131,7 +131,7 @@ function exampleApi() {
 
   function exampleYoutubeApi() {
     const baseUrl="https://www.googleapis.com/youtube/v3/search";
-    const apiKey="AIzaSyDM444DcshHDIskKJ-QIZAl-Y9jQ25ILH4";
+    const apiKey="AIzaSyBstGcKnzgR7hgh0hR_NyZjXXqTNJvJeMY";
 
     function formatQueryParams(params) {
       const queryItems = Object.keys(params)
@@ -335,7 +335,7 @@ function searchApi() {
 
   function youtubeApi() {
     const baseUrl="https://www.googleapis.com/youtube/v3/search";
-    const apiKey="AIzaSyDM444DcshHDIskKJ-QIZAl-Y9jQ25ILH4";
+    const apiKey="AIzaSyBstGcKnzgR7hgh0hR_NyZjXXqTNJvJeMY";
 
     function formatQueryParams(params) {
       const queryItems = Object.keys(params)
